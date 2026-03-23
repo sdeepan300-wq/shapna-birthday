@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Thangapulla ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: black;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+}
+
+.page {
+    display: none;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.active {
+    display: flex;
+}
+
+/* Button */
+button {
+    padding: 12px 20px;
+    font-size: 16px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 8px;
+    background: pink;
+    cursor: pointer;
+}
+
+/* Decorations */
+.decor {
+    font-size: 40px;
+}
+
+/* Balloons */
+.balloon {
+    position: absolute;
+    font-size: 30px;
+    animation: float 5s linear infinite;
+}
+
+@keyframes float {
+    from { transform: translateY(100vh); }
+    to { transform: translateY(-100vh); }
+}
+
+/* Fireworks */
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Cake */
+.cake {
+    font-size: 80px;
+}
+
+/* Mobile */
+h1 { font-size: 26px; }
+p { font-size: 16px; padding: 10px; }
+img { width: 150px; border-radius: 50%; margin-top: 10px; }
+</style>
+</head>
+
+<body>
+
+<!-- Page 1 -->
+<div class="page active" id="page1">
+    <h1>Happy Birthday Thangapulla ❤️</h1>
+    <button onclick="nextPage(2)">Tap to Continue</button>
+</div>
+
+<!-- Page 2 -->
+<div class="page" id="page2">
+    <h2>Let’s Decorate 🎉</h2>
+    <div id="decor"></div>
+    <button onclick="addDecor()">Click to Decorate</button>
+</div>
+
+<!-- Page 3 -->
+<div class="page" id="page3">
+    <h2>Balloons Time 🎈</h2>
+    <button onclick="addBalloons()">Click for Balloons</button>
+</div>
+
+<!-- Page 4 -->
+<div class="page" id="page4">
+    <h2>Fireworks 🎆</h2>
+    <canvas id="fireworks"></canvas>
+    <button onclick="startFireworks()">Click for Fireworks</button>
+</div>
+
+<!-- Page 5 -->
+<div class="page" id="page5">
+    <h2>Cake Cutting 🎂</h2>
+    <div class="cake">🎂</div>
+    <button onclick="nextPage(6)">Cut the Cake</button>
+</div>
+
+<!-- Page 6 FINAL -->
+<div class="page" id="page6">
+    <h2>Happy Birthday Thangoo ❤️</h2>
+
+    <p>Thangapulla… 💖</p>
+    <p>Thangoo yedhukum feel panatha seri ya…  
+    una suthi neraiya peru irukum unaku love kuduka…</p>
+
+    <p>Unga ayya vela thativudu pathukala…  
+    aprm rombha azhugatha…</p>
+
+    <p>one day the life will change , don't give up hope </p>
+
+    <p>Aprm nee thappae panalum  
+    un side tha irupen… ❤️</p>
+
+    <p><b>Happy Birthday Thangoooooooooooooooo 🎉</b></p>
+
+</div>
+
+<script>
+function nextPage(n) {
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+    document.getElementById("page" + n).classList.add("active");
+}
+
+/* Decorations */
+function addDecor() {
+    document.getElementById("decor").innerHTML = "🎉 🎊 🎉 🎊";
+    setTimeout(() => nextPage(3), 1000);
+}
+
+/* Balloons */
+function addBalloons() {
+    for (let i = 0; i < 10; i++) {
+        let b = document.createElement("div");
+        b.className = "balloon";
+        b.innerHTML = "🎈";
+        b.style.left = Math.random() * 100 + "vw";
+        document.body.appendChild(b);
+    }
+    setTimeout(() => nextPage(4), 1500);
+}
+
+/* Fireworks */
+function startFireworks() {
+    const canvas = document.getElementById("fireworks");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    function fire() {
+        for (let i = 0; i < 50; i++) {
+            ctx.fillStyle = "white";
+            ctx.fillRect(Math.random()*canvas.width, Math.random()*canvas.height, 2, 2);
+        }
+    }
+
+    let interval = setInterval(fire, 200);
+
+    setTimeout(() => {
+        clearInterval(interval);
+        nextPage(5);
+    }, 2000);
+}
+</script>
+
+</body>
+</html>
